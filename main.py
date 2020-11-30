@@ -26,8 +26,12 @@ def read_txt():
 class convert_RBG:
     adjusted_data = []
     def eliminate_neg():
-        height_data.sort()
-        lowest_value = height_data[0]
+        temp_list = []
+        for x in height_data:
+            temp_list.append(x)
+
+        temp_list.sort()
+        lowest_value = temp_list[0]
         if lowest_value < 0:
             lowest_value_con = -lowest_value
 
@@ -38,16 +42,31 @@ class convert_RBG:
 
         for x in height_data:
             convert_RBG.adjusted_data.append(x + add_value)
+        temp_list = []
 
-        def RGB_conversion():
-            pass
+
+    def RGB_conversion():
+        # Finds highest_value
+        temp_list = []
+        for x in convert_RBG.adjusted_data:
+            temp_list.append(x)
+        temp_list.sort()
+        temp_list.reverse()
+        highest_value = temp_list[0]
+        temp_list = []
+
+        # Finds the number to devide by to find the RGB value
+        dev_factor = highest_value / 255
+        for x in convert_RBG.adjusted_data:
+            RGB_values.append(math.floor(x / dev_factor))
 
 
 
 # All the code that will be run on start
 read_txt()
-print(len(height_data))
+
 # Finds the side resolutions
 side_res = math.floor(math.sqrt(len(height_data)))
-print(side_res)
+
 convert_RBG.eliminate_neg()
+convert_RBG.RGB_conversion()

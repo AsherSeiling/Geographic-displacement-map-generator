@@ -1,11 +1,10 @@
-import math
-import PIL
+import math, PIL, time
 from PIL import Image
-import time
 
 
 # Global Vars
 height_data = []
+RGB_values = []
 file_path = 'Exaple_terrain_height_data.txt'
 side_res = 0
 
@@ -25,8 +24,23 @@ def read_txt():
 
 # Converts to RGB values
 class convert_RBG:
+    adjusted_data = []
     def eliminate_neg():
-        pass
+        height_data.sort()
+        lowest_value = height_data[0]
+        if lowest_value < 0:
+            lowest_value_con = -lowest_value
+
+        if lowest_value < 0:
+            add_value = lowest_value_con
+        else:
+            add_value = lowest_value
+
+        for x in height_data:
+            convert_RBG.adjusted_data.append(x + add_value)
+
+        def RGB_conversion():
+            pass
 
 
 
@@ -36,3 +50,4 @@ print(len(height_data))
 # Finds the side resolutions
 side_res = math.floor(math.sqrt(len(height_data)))
 print(side_res)
+convert_RBG.eliminate_neg()

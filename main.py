@@ -1,4 +1,4 @@
-import math, PIL, time
+import math, PIL
 from PIL import Image
 
 
@@ -60,7 +60,24 @@ class convert_RBG:
         for x in convert_RBG.adjusted_data:
             RGB_values.append(math.floor(x / dev_factor))
 
+# Makes the Image
+def create_image():
+    im = PIL.Image.new(mode = "RGB", size = (side_res, side_res))
 
+    y_current = 0
+    x_current = 0
+
+    for i in RGB_values:
+        placepixel = True
+        im.putpixel((x_current, y_current), (i, i, i, 255))
+        if x_current >= side_res-1:
+            y_current += 1
+            x_current = 0
+            placepixel = False
+        if y_current == side_res:
+            im.save("Image.png")
+        if placepixel == True:
+            x_current += 1
 
 # All the code that will be run on start
 read_txt()
@@ -70,3 +87,4 @@ side_res = math.floor(math.sqrt(len(height_data)))
 
 convert_RBG.eliminate_neg()
 convert_RBG.RGB_conversion()
+create_image()
